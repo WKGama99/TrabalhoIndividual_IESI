@@ -1,0 +1,17 @@
+
+# Ficheiros temporarios do macOS
+.DS_Store
+**/.DS_Store
+
+# Backups do PostgreSQL
+*.backup
+**/Backups/
+
+# Credenciais e configuracoes privadas
+.env
+.env.*
+!.env.example
+
+# Ficheiros temporarios
+*.tmp
+*.log
