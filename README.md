@@ -38,20 +38,32 @@ A base de dados é composta por seis tabelas:
 - Implementação inicial de um trigger de prevenção de reservas sobrepostas
 - Testes de horários sobrepostos e consecutivos
 
+
 ## 5. Ficheiros SQL
 
-Na pasta `Base de Dados` encontram-se:
-
-- `01_criar_tabelas.sql` — Criação das tabelas
-- `02_inserir_dados.sql` — Dados de exemplo exportados do PostgreSQL
-- `03_consultas.sql` — Consultas SQL
-- `04_funcoes_triggers.sql` — Função e trigger de validação de reservas
+- `01_criar_tabelas.sql` — Estrutura da base de dados
+- `02_inserir_dados.sql` — Dados iniciais de exemplo
+- `03_consultas.sql` — Dez consultas SQL
+- `04_funcoes_triggers.sql` — Funções e triggers
+- `05_procedimentos.sql` — Três procedimentos armazenados
+- `06_testes.sql` — Consultas e documentação dos testes
 
 ## 6. Estado do Desenvolvimento
 
-O projeto encontra-se em desenvolvimento.
+A estrutura principal da base de dados foi implementada e
+reconstruída com sucesso numa base de dados independente.
 
-As próximas etapas incluem completar os dados de teste, desenvolver as restantes consultas SQL, implementar os procedimentos armazenados e reforçar as validações de reservas.
+Foram realizados testes de:
+- Criação e cancelamento de reservas
+- Prevenção de conflitos de horários
+- Validação de datas e utilizadores
+- Rejeição de recursos indisponíveis
+- Alteração e reativação de reservas
+- Bloqueios em operações simultâneas
+
+A base de dados permanece em fase de validação final.
+Falta consolidar os testes e rever casos adicionais
+de concorrência e integridade dos dados.
 
 ## 7. Entrega
 
