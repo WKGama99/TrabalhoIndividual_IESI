@@ -1,19 +1,39 @@
+
 CREATE OR REPLACE FUNCTION public.verificar_conflito_reserva()
- RETURNS trigger
- LANGUAGE plpgsql
+RETURNS trigger
+LANGUAGE plpgsql
 AS $function$
 DECLARE
     inicio_novo TIMESTAMP;
     fim_novo TIMESTAMP;
     estado_novo VARCHAR(20);
+    estado_recurso VARCHAR(20);
 BEGIN
-    -- Obter os dados da nova reserva
+
+    -- Verificar e bloquear o recurso
+    SELECT estado INTO estado_recurso
+    FROM recurso
+    WHERE id_recurso = NEW.id_recurso
+    FOR UPDATE;
+
+    IF NOT FOUND THEN
+        RAISE EXCEPTION
+            'Recurso % nao existe', NEW.id_recurso;
+    END IF;
+
+    -- Impedir recursos indisponiveis
+    IF estado_recurso <> 'disponivel' THEN
+        RAISE EXCEPTION
+            'Recurso % indisponivel', NEW.id_recurso;
+    END IF;
+
+    -- Obter os dados da reserva
     SELECT data_inicio, data_fim, estado
     INTO inicio_novo, fim_novo, estado_novo
     FROM reserva
     WHERE id_reserva = NEW.id_reserva;
 
-    -- Verificar se existe conflito
+    -- Verificar conflitos de horario
     IF estado_novo = 'ativa' AND EXISTS (
         SELECT 1
         FROM reserva AS r
@@ -26,13 +46,14 @@ BEGIN
           AND r.data_fim > inicio_novo
     ) THEN
         RAISE EXCEPTION
-            'Conflito de horário para o recurso %',
+            'Conflito de horario para o recurso %',
             NEW.id_recurso;
     END IF;
 
     RETURN NEW;
 END;
 $function$;
+
 
 
 CREATE TRIGGER trg_impedir_sobreposicao BEFORE INSERT OR UPDATE ON public.reservarecurso FOR EACH ROW EXECUTE FUNCTION verificar_conflito_reserva();
