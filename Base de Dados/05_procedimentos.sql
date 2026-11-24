@@ -48,7 +48,7 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
     v_id_reserva INTEGER;
-    v_estado VARCHAR(20);
+    v_estado VARCHAR(20); 
 BEGIN
 
     -- 1. Validar as datas
@@ -188,4 +188,5 @@ BEGIN
 
 END;
 $$;
+
 

@@ -36,3 +36,54 @@ $function$;
 
 
 CREATE TRIGGER trg_impedir_sobreposicao BEFORE INSERT OR UPDATE ON public.reservarecurso FOR EACH ROW EXECUTE FUNCTION verificar_conflito_reserva();
+
+
+
+-- ==========================================
+-- VALIDAR ALTERACOES DE RESERVAS
+-- ==========================================
+
+CREATE OR REPLACE FUNCTION
+public.verificar_atualizacao_reserva()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+
+    -- Verificar conflitos se a reserva estiver ativa
+    IF NEW.estado = 'ativa' AND EXISTS (
+
+        SELECT 1
+        FROM reservarecurso AS rr
+        JOIN reservarecurso AS rr2
+            ON rr.id_recurso = rr2.id_recurso
+        JOIN reserva AS r
+            ON rr2.id_reserva = r.id_reserva
+
+        WHERE rr.id_reserva = NEW.id_reserva
+          AND r.id_reserva <> NEW.id_reserva
+          AND r.estado = 'ativa'
+          AND r.data_inicio < NEW.data_fim
+          AND r.data_fim > NEW.data_inicio
+
+    ) THEN
+
+        RAISE EXCEPTION
+            'Alteracao invalida: conflito de horario';
+
+    END IF;
+
+    RETURN NEW;
+
+END;
+$$;
+
+
+-- Criar o trigger na tabela reserva
+
+CREATE TRIGGER trg_verificar_atualizacao_reserva
+BEFORE UPDATE OF data_inicio, data_fim, estado
+ON public.reserva
+FOR EACH ROW
+EXECUTE FUNCTION
+public.verificar_atualizacao_reserva();
