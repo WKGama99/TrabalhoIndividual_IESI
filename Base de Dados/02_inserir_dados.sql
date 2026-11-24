@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict RZnnhvXmU6ulwBY7laA0iJp8OHFgyhrlp7dN2VmstBIOP5dBwdOUJoBa650DSBW
+
 
 -- Dumped from database version 18.7 (Postgres.app)
 -- Dumped by pg_dump version 18.6
@@ -26,8 +26,28 @@ SET row_security = off;
 -- Dependencies: 229
 -- Data for Name: incidente; Type: TABLE DATA; Schema: public; Owner: gustavogama
 --
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (1, 'João Silva', 'joao@empresa.pt', 'hash_exemplo_nao_real', 'colaborador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (2, 'Ana Costa', 'ana@empresa.pt', 'hash_exemplo_ana', 'administrador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (3, 'Pedro Lopes', 'pedro@empresa.pt', 'hash_exemplo_pedro', 'colaborador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (4, 'Maria Santos', 'maria@empresa.pt', 'hash_exemplo_maria', 'colaborador', false);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (5, 'Miguel Ferreira', 'miguel@empresa.example', 'hash_teste_05', 'colaborador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (6, 'Sofia Almeida', 'sofia@empresa.example', 'hash_teste_06', 'colaborador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (7, 'Ricardo Oliveira', 'ricardo@empresa.example', 'hash_teste_07', 'colaborador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (8, 'Beatriz Martins', 'beatriz@empresa.example', 'hash_teste_08', 'colaborador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (9, 'Tiago Rodrigues', 'tiago@empresa.example', 'hash_teste_09', 'administrador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (10, 'Carolina Sousa', 'carolina@empresa.example', 'hash_teste_10', 'colaborador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (11, 'André Pereira', 'andre@empresa.example', 'hash_teste_11', 'colaborador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (12, 'Inês Carvalho', 'ines@empresa.example', 'hash_teste_12', 'colaborador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (13, 'Diogo Ribeiro', 'diogo@empresa.example', 'hash_teste_13', 'colaborador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (14, 'Mariana Gomes', 'mariana@empresa.example', 'hash_teste_14', 'colaborador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (15, 'Rafael Moreira', 'rafael@empresa.example', 'hash_teste_15', 'colaborador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (16, 'Leonor Fernandes', 'leonor@empresa.example', 'hash_teste_16', 'colaborador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (17, 'Francisco Neves', 'francisco@empresa.example', 'hash_teste_17', 'colaborador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (18, 'Matilde Correia', 'matilde@empresa.example', 'hash_teste_18', 'colaborador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (19, 'Gonçalo Teixeira', 'goncalo@empresa.example', 'hash_teste_19', 'colaborador', true);
+INSERT INTO public.utilizador (id_utilizador, nome, email, palavra_passe_hash, perfil, ativo) OVERRIDING SYSTEM VALUE VALUES (20, 'Catarina Dias', 'catarina@empresa.example', 'hash_teste_20', 'colaborador', true);
 
-INSERT INTO public.incidente (id_incidente, id_recurso, id_utilizador, descricao, data_registo, estado) OVERRIDING SYSTEM VALUE VALUES (1, 2, 1, 'O osciloscópio apresenta problemas ao ligar.', '2026-11-23 14:23:37.177769', 'aberto');
+
 
 
 --
@@ -112,7 +132,7 @@ INSERT INTO public.reservarecurso (id_reserva, id_recurso) VALUES (5, 1);
 INSERT INTO public.reservarecurso (id_reserva, id_recurso) VALUES (5, 2);
 INSERT INTO public.reservarecurso (id_reserva, id_recurso) VALUES (6, 1);
 INSERT INTO public.reservarecurso (id_reserva, id_recurso) VALUES (6, 2);
-
+INSERT INTO public.incidente (id_incidente, id_recurso, id_utilizador, descricao, data_registo, estado) OVERRIDING SYSTEM VALUE VALUES (1, 2, 1, 'O osciloscópio apresenta problemas ao ligar.', '2026-11-23 14:23:37.177769', 'aberto');
 
 --
 -- TOC entry 3879 (class 0 OID 16393)
@@ -193,5 +213,5 @@ SELECT pg_catalog.setval('public.utilizador_id_utilizador_seq', 20, true);
 -- PostgreSQL database dump complete
 --
 
-\unrestrict RZnnhvXmU6ulwBY7laA0iJp8OHFgyhrlp7dN2VmstBIOP5dBwdOUJoBa650DSBW
+
 
